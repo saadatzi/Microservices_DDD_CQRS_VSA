@@ -1,0 +1,44 @@
+# Ignore node_modules directory if using Node.js
+node_modules
+
+# Ignore .git directory
+.git
+
+# Ignore .DS_Store files on macOS
+.DS_Store
+
+# Ignore temporary and build directories
+*.suo
+*.user
+*.sln.docstates
+
+# Ignore Visual Studio Code specific files
+.vscode
+
+# Ignore npm cache directory
+npm-cache
+
+# Ignore bower components directory if using Bower
+bower_components
+
+# Ignore package-lock.json file
+package-lock.json
+
+# Ignore yarn.lock file
+yarn.lock
+
+# Ignore Docker related files in the root directory
+Dockerfile*
+docker-compose*
+
+# Ignore log files
+*.log
+
+# Ignore temporary build files
+*.tmp
+*.bak
+*.swp
+
+# Ignore IDE specific configuration files
+.idea
+*.iml
