@@ -1,0 +1,42 @@
+@Api_HostAddress = http://localhost:5227
+
+### Get all to-do items
+GET {{Api_HostAddress}}/todoitems
+Content-Type: application/json
+
+###
+
+### Get a specific to-do item by ID
+GET {{Api_HostAddress}}/todoitems/1
+Content-Type: application/json
+
+###
+
+### Add a new to-do item
+POST {{Api_HostAddress}}/todoitems
+Content-Type: application/json
+
+{
+  "name": "New Task",
+  "isComplete": false
+}
+
+###
+
+### Update an existing to-do item
+PUT {{Api_HostAddress}}/todoitems/1
+Content-Type: application/json
+
+{
+  "name": "Updated Task",
+  "isComplete": true
+}
+
+###
+
+### Delete a to-do item
+DELETE {{Api_HostAddress}}/todoitems/1
+Content-Type: application/json
+
+
+###
