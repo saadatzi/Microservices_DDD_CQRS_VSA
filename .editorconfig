@@ -1,0 +1,5 @@
+[*.cs]
+
+
+# Expected file header template
+file_header_template = Copyright (c) 2024 SSS. All rights reserved.

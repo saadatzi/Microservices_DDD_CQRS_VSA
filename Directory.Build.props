@@ -1,0 +1,57 @@
+<Project>
+  <PropertyGroup>
+    <!-- Common project settings -->
+    <TargetFramework>net8.0</TargetFramework>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <!-- Code quality settings -->
+    <!-- <CodeAnalysisRuleSet>..\..\..\CodeAnalysis.ruleset</CodeAnalysisRuleSet> -->
+    <!-- <SonarQubeTargetPath Condition="'$(SonarQubeTargetPath)' == ''">..\..\..\SonarQube.targets</SonarQubeTargetPath> -->
+
+    <!-- Package settings -->
+    <!-- <PackageId>DomainDrivenDesign</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>SSS</Authors>
+    <Company>SSS</Company>
+    <Product>MyProduct</Product>
+    <Copyright>Copyright (c) SSS</Copyright>
+    <PackageLicenseUrl>https://example.com/license</PackageLicenseUrl>
+    <PackageProjectUrl>https://example.com/project</PackageProjectUrl> -->
+
+    <!-- Build settings -->
+    <!-- <OutputPath>$(SolutionDir)bin\$(Configuration)</OutputPath> -->
+    <!-- <IntermediatePath>$(SolutionDir)obj\$(Configuration)</IntermediatePath> -->
+    <!-- <BaseIntermediatePath>$(SolutionDir)obj\</BaseIntermediatePath> -->
+
+    <!-- NuGet settings -->
+    <!-- <RestorePackages>true</RestorePackages> -->
+    <!-- <PackageRestoreMode>None</PackageRestoreMode> -->
+    <!-- <PackageRestoreConsoleLoggingLevel>None</PackageRestoreConsoleLoggingLevel> -->
+
+    <!-- Test settings -->
+    <!-- <RunCodeAnalysis>true</RunCodeAnalysis> -->
+    <!-- <TreatTestFailureAsBuildFailure>true</TreatTestFailureAsBuildFailure> -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Common dependencies -->
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- <ItemGroup Condition="'$(Configuration)' == 'Debug'"> -->
+    <!-- Debug dependencies -->
+    <!-- <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" /> -->
+  <!-- </ItemGroup> -->
+
+  <!-- <ItemGroup Condition="'$(Configuration)' == 'Release'"> -->
+    <!-- Release dependencies -->
+    <!-- <PackageReference Include="Microsoft.Extensions.Logging.Release" Version="6.0.0" /> -->
+  <!-- </ItemGroup> -->
+</Project>
