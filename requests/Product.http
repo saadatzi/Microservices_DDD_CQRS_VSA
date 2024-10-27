@@ -27,7 +27,7 @@ Content-Type: application/json
 
 {
     "name": "Sample Product",
-    "category": ["Satan1", "Satan2"],
+    "category": ["Satan1", "Satan3"],
     "description": "This is a sample Satan",
     "imageFile": "image.jpg",
     "price": 150.00
@@ -55,5 +55,6 @@ Content-Type: application/json
 ###
 
 # Remove a product by ID
-DELETE {{Api_HostAddress}}/products/{id}
+@delete_id = 0192cfa5-3e08-4035-bf32-d3e1fed46893
+DELETE {{Api_HostAddress}}/products/{{delete_id}}
 Content-Type: application/json

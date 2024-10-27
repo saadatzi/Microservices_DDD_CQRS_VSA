@@ -3,10 +3,9 @@
 //         Copyright (c) 2024 SSS. All rights reserved.
 //     </copyright>
 // </fileheader>
+namespace Catalog.Api.Products.UpdateProduct;
 
 using Catalog.Api.Exceptions;
-
-namespace Catalog.Api.Products.UpdateProduct;
 
 /// <summary>
 /// Handles the update of a product.
