@@ -1,1 +1,18 @@
-{}
+{
+    "[csharp]": {
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        },
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        // Disable IntelliSense suggestion on trigger characters (like ".")
+        "editor.suggestOnTriggerCharacters": true,
+        // Disable automatic parameter hints
+        "editor.parameterHints.enabled": true
+    },
+    "omnisharp.enableEditorConfigSupport": true,
+    "files.trimTrailingWhitespace": false,
+}

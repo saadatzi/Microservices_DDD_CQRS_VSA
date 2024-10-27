@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/EShop.Microservices/Services/Catalog/Catalog.Api/bin/Debug/net8.0/Catalog.Api.dll", // Change to your project's output path
+            "args": [],
+            "cwd": "${workspaceFolder}/src/EShop.Microservices/Services/Catalog/Catalog.Api",
+            "stopAtEntry": false,
+            // "serverReadyAction": { // this interrupts opening the browser
+            //     "action": "openExternally",
+            //     "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            // },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:5000;https://localhost:5005" // Set your desired URLs here
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views",
+                "/wwwroot": "${workspaceFolder}/wwwroot"
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            // "processId": "${command:pickProcess}"
+        }
+    ]
+}
