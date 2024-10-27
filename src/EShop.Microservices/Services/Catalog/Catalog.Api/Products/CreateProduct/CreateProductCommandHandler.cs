@@ -6,13 +6,11 @@
 
 namespace Catalog.Api.Products.CreateProduct;
 
-using BuildingBlocks.CQRS;
-using Catalog.Api.Models;
-
 /// <summary>
 /// Handles the creation of a product.
 /// </summary>
-internal class CreateProductCommandHandler : ICommandHandler<CreateProductCommand, CreateproductResult>
+internal class CreateProductCommandHandler(IDocumentSession session)
+    : ICommandHandler<CreateProductCommand, CreateproductResult>
 {
     /// <summary>
     /// Handles the creation of a product based on the provided command.
@@ -34,12 +32,13 @@ internal class CreateProductCommandHandler : ICommandHandler<CreateProductComman
             Price = command.Price,
         };
 
-        await Task.Delay(200);
-
         // TODO
         // save to database
+        session.Store(product);
+        await session.SaveChangesAsync(cancellationToken);
+
         // return new CreateproductResult(newProduct.Id);
-        return new CreateproductResult(Guid.NewGuid());
+        return new CreateproductResult(product.Id);
     }
 }
 
