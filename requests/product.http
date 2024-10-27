@@ -1,0 +1,52 @@
+
+@Api_HostAddress = http://localhost:5000
+
+# List all products
+GET {{Api_HostAddress}}/products
+Content-Type: application/json
+
+###
+
+# Fetch a specific product by ID
+GET {{Api_HostAddress}}/products/{id}
+Content-Type: application/json
+
+###
+
+# Get products by category
+GET {{Api_HostAddress}}/products/category
+Content-Type: application/json
+
+###
+
+# Create a new product
+POST {{Api_HostAddress}}/products
+Content-Type: application/json
+
+{
+    "name": "Sample Product",
+    "category": ["Category1", "Category2"],
+    "description": "This is a sample product",
+    "imageFile": "image.jpg",
+    "price": 100.00
+}
+
+###
+
+# Update a product by ID
+PUT {{Api_HostAddress}}/products/{id}
+Content-Type: application/json
+
+{
+    "name": "Updated Product",
+    "category": ["UpdatedCategory"],
+    "description": "Updated description",
+    "imageFile": "updated_image.jpg",
+    "price": 150.00
+}
+
+###
+
+# Remove a product by ID
+DELETE {{Api_HostAddress}}/products/{id}
+Content-Type: application/json
