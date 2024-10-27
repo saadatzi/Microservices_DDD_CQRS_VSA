@@ -36,15 +36,20 @@ Content-Type: application/json
 ###
 
 # Update a product by ID
-PUT {{Api_HostAddress}}/products/{id}
+PUT {{Api_HostAddress}}/products
 Content-Type: application/json
 
 {
-    "name": "Updated Product",
-    "category": ["UpdatedCategory"],
-    "description": "Updated description",
-    "imageFile": "updated_image.jpg",
-    "price": 150.00
+    "id": "0192cdfd-a3a6-49fc-b88d-b01aaae605fa",
+    "name": "Updated Name Product",
+    "category": [
+        "Category1",
+        "Category2",
+        "CUpdated12"
+    ],
+    "description": "Updated description 2nd",
+    "imageFile": "imageUpdated.jpg",
+    "price": 133
 }
 
 ###
