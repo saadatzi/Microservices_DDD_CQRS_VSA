@@ -8,7 +8,8 @@ Content-Type: application/json
 ###
 
 # Fetch a specific product by ID
-GET {{Api_HostAddress}}/products/{id}
+@id = 0192ce19-f2bc-4761-a66e-a114a8e347d7
+GET {{Api_HostAddress}}/products/{{id}}
 Content-Type: application/json
 
 ###
