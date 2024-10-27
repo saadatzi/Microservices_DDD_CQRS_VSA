@@ -6,7 +6,6 @@
 
 namespace Catalog.Api.Products.CreateProduct;
 
-using System.Runtime.CompilerServices;
 using BuildingBlocks.CQRS;
 using Catalog.Api.Models;
 

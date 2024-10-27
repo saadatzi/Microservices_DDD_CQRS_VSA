@@ -6,3 +6,6 @@ file_header_template = Copyright (c) 2024 SSS. All rights reserved.
 
 # SA1101: Prefix local calls with this
 dotnet_diagnostic.SA1101.severity = silent
+
+# SA1200: Using directives should be placed correctly
+dotnet_diagnostic.SA1200.severity = silent
