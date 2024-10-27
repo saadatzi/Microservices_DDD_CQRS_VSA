@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  catalog:
+    image: eshop/catalog
+    ports:
+      - "5001:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: CatalogDb
+    ports:
+      - "5432:5432"
