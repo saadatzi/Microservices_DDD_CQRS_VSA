@@ -57,7 +57,7 @@ The **MediatR** library is a popular .NET library that implements the mediator p
     public interface IQuery<TResult> : IRequest<TResult> { }
     ```
 
-![alt text](image.png)
+![alt text](../Images/image.png)
 ### MediatR and ASP.NET Core Minimal APIs
 
 **ASP.NET Core** applications using **MediatR** leverage **Minimal APIs** as the entry point for handling HTTP requests. Instead of embedding business logic directly within the API, controllers or endpoints delegate the processing to MediatR, thereby centralizing request handling.
@@ -74,7 +74,7 @@ The **MediatR** library is a popular .NET library that implements the mediator p
 
 This setup decouples the application logic from the API layer, promoting clean architecture and easier testability. The **Minimal API** framework combined with **MediatR** enhances CQRS by clearly organizing commands and queries, delegating logic to handlers that operate independently of the API layer.
 
-![alt text](image-1.png)
+![alt text](../Images/image-1.png)
 ### Mediator Pattern and Pipeline Behaviors
 
 The **Mediator Pattern** is particularly useful in complex or enterprise-level applications, where request processing often involves more than just executing business logic. It provides a centralized approach to managing cross-cutting concerns like logging, validation, auditing, and security checks.
