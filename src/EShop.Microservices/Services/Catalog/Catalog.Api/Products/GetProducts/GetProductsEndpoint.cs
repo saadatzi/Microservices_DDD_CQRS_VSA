@@ -21,11 +21,11 @@ public class GetProductsEndpoint : ICarterModule
             async (ISender sender) =>
             {
                 var result = await sender.Send(new GetProductsQuery());
-                var response = result.Adapt<GetProductResponse>();
+                var response = result.Adapt<GetProductsResponse>();
                 return Results.Ok(response);
             })
             .WithName("GetProducts")
-            .Produces<GetProductResponse>(StatusCodes.Status200OK)
+            .Produces<GetProductsResponse>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .WithSummary("Get Products")
             .WithDescription("Get Products");
@@ -37,4 +37,4 @@ public class GetProductsEndpoint : ICarterModule
 /// <summary>
 /// Represents the response for creating a product.
 /// </summary>
-public record GetProductResponse(IEnumerable<Product> Products);
+public record GetProductsResponse(IEnumerable<Product> Products);
