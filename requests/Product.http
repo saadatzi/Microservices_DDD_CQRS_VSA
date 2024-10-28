@@ -2,7 +2,7 @@
 @Api_HostAddress = http://localhost:5000
 
 # List all products
-GET {{Api_HostAddress}}/products
+GET {{Api_HostAddress}}/products?pageNumber=4&pageSize=2
 Content-Type: application/json
 
 ###

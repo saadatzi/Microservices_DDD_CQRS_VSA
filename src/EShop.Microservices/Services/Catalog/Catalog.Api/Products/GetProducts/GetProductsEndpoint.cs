@@ -18,9 +18,10 @@ public class GetProductsEndpoint : ICarterModule
     {
         app.MapGet(
             "/products",
-            async (ISender sender) =>
+            async ([AsParameters] GetProductRequest request, ISender sender) =>
             {
-                var result = await sender.Send(new GetProductsQuery());
+                var query = request.Adapt<GetProductsQuery>();
+                var result = await sender.Send(query);
                 var response = result.Adapt<GetProductsResponse>();
                 return Results.Ok(response);
             })
@@ -32,7 +33,13 @@ public class GetProductsEndpoint : ICarterModule
     }
 }
 
-// public record GetProductRequest();
+/// <summary>
+/// Represents a request to get a list of products with pagination.
+/// </summary>
+/// <param name="PageNumber">The page number for pagination. Default is 1.</param>
+/// <param name="PageSize">The number of items per page for pagination. Default is 10.</param>
+
+public record GetProductRequest(int? PageNumber = 1, int? PageSize = 10);
 
 /// <summary>
 /// Represents the response for creating a product.

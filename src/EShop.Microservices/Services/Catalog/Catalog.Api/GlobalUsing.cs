@@ -15,6 +15,7 @@ global using Catalog.Api.Models;
 global using FluentValidation;
 global using Mapster;
 global using Marten;
+global using Marten.Pagination;
 global using Marten.Schema;
 global using MediatR;
 global using Microsoft.AspNetCore.Diagnostics;
