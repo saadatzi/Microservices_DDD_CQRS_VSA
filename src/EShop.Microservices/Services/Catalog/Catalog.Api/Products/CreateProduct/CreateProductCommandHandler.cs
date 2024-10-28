@@ -27,11 +27,11 @@ internal class CreateProductCommandHandler(
         // Business logic to create a product
         // Example:
         // Create a new product entity from command object
-        var result = await validator.ValidateAsync(command, cancellationToken);
-        var errors = result.Errors.Select(x => x.ErrorMessage).ToList();
-        if (errors.Any())
+        var validationResult = await validator.ValidateAsync(command, cancellationToken);
+        if (!validationResult.IsValid)
         {
-            throw new ValidationException(errors.FirstOrDefault());
+            var errors = validationResult.Errors.Select(e => e.ErrorMessage);
+            throw new CustomValidationException(errors);
         }
 
         var product = new Product
