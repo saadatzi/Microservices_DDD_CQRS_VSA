@@ -4,12 +4,16 @@
 //     </copyright>
 // </fileheader>
 
+using FluentValidation;
+
 namespace Catalog.Api.Products.CreateProduct;
 
 /// <summary>
 /// Handles the creation of a product.
 /// </summary>
-internal class CreateProductCommandHandler(IDocumentSession session)
+internal class CreateProductCommandHandler(
+    IDocumentSession session,
+    IValidator<CreateProductCommand> validator)
     : ICommandHandler<CreateProductCommand, CreateproductResult>
 {
     /// <summary>
@@ -23,6 +27,13 @@ internal class CreateProductCommandHandler(IDocumentSession session)
         // Business logic to create a product
         // Example:
         // Create a new product entity from command object
+        var result = await validator.ValidateAsync(command, cancellationToken);
+        var errors = result.Errors.Select(x => x.ErrorMessage).ToList();
+        if (errors.Any())
+        {
+            throw new ValidationException(errors.FirstOrDefault());
+        }
+
         var product = new Product
         {
             Name = command.Name,
