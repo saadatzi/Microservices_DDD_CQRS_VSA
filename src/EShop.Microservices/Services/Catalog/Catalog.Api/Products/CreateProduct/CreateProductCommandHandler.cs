@@ -10,8 +10,7 @@ namespace Catalog.Api.Products.CreateProduct;
 /// Handles the creation of a product.
 /// </summary>
 internal class CreateProductCommandHandler(
-    IDocumentSession session,
-    ILogger<CreateProductCommandHandler> logger)
+    IDocumentSession session)
     : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     /// <summary>
@@ -22,8 +21,6 @@ internal class CreateProductCommandHandler(
     /// <returns>A task that represents the asynchronous operation and returns the created product result.</returns>
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
-        logger.LogInformation("CreateProductCommandHandler.Handle called with {@Command}", command);
-
         // Business logic to create a product
         // Create a new product entity from command object
         var product = new Product

@@ -10,10 +10,8 @@ namespace Catalog.Api.Products.GetProductByCategory;
 /// Handles queries to retrieve products by category.
 /// </summary>
 /// <param name="session">The document session for database operations.</param>
-/// <param name="logger">Logger instance for logging information.</param>
 internal class GetProductByCategoryHandler(
-    IDocumentSession session,
-    ILogger<GetProductByCategoryHandler> logger)
+    IDocumentSession session)
     : IQueryHandler<GetProductByCategoryQuery, GetProductByCategoryResult>
 {
     /// <summary>
@@ -24,9 +22,6 @@ internal class GetProductByCategoryHandler(
     /// <returns>A result containing a list of products in the specified category.</returns>
     public async Task<GetProductByCategoryResult> Handle(GetProductByCategoryQuery query, CancellationToken cancellationToken)
     {
-        // Log the query information.
-        logger.LogInformation("GetProductByCategoryQueryHandler.Handle called with {@Query}", query);
-
         // Retrieve products from the specified category.
         var products = await session.Query<Product>()
             .Where(p => p.Category.Any(c => c.Contains(query.Category)))

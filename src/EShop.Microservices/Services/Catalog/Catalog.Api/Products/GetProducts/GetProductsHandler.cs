@@ -10,8 +10,7 @@ namespace Catalog.Api.Products.GetProducts;
 /// Handles the creation of a product.
 /// </summary>
 internal class GetProductsHandler(
-    IDocumentSession session,
-    ILogger<GetProductsHandler> logger)
+    IDocumentSession session)
     : IQueryHandler<GetProductsQuery, GetProductsResult>
 {
     /// <summary>
@@ -22,9 +21,6 @@ internal class GetProductsHandler(
     /// <returns>A task that represents the asynchronous operation and returns the product result.</returns>
     public async Task<GetProductsResult> Handle(GetProductsQuery query, CancellationToken cancellationToken)
     {
-        // Business logic to Get a product
-        logger.LogInformation("GetProductsQueryHandler.Handle called with {@Query}", query);
-
         var products = await session.Query<Product>().ToListAsync(cancellationToken);
 
         // return list of products;

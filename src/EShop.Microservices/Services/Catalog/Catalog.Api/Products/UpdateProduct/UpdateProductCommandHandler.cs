@@ -23,8 +23,6 @@ internal class UpdateProductCommandHandler(
     /// <returns>A task that represents the asynchronous operation and returns the updated product result.</returns>
     public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
     {
-        logger.LogInformation("UpdateProductCommandHandler.Handle called with {@Command}", command);
-
         // Update the product entity from command object
         var product = await session.LoadAsync<Product>(command.Id, cancellationToken);
 

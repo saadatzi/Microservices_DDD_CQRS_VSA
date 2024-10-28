@@ -23,8 +23,6 @@ internal class DeleteProductCommandHandler(
     /// <returns>A task that represents the asynchronous operation and returns the deleted product result.</returns>
     public async Task<DeleteProductResult> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
     {
-        logger.LogInformation("DeleteProductCommandHandler.Handle called with {@Command}", command);
-
         // Delete the product entity from command object
         var product = await session.LoadAsync<Product>(command.Id, cancellationToken);
 

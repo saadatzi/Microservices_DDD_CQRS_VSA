@@ -11,8 +11,7 @@ using Catalog.Api.Exceptions;
 /// Handles the creation of a product.
 /// </summary>
 internal class GetProductByIdHandler(
-    IDocumentSession session,
-    ILogger<GetProductByIdHandler> logger)
+    IDocumentSession session)
     : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
 {
     /// <summary>
@@ -23,9 +22,6 @@ internal class GetProductByIdHandler(
     /// <returns>A <see cref="GetProductByIdResult"/> containing the product data if found.</returns>
     public async Task<GetProductByIdResult> Handle(GetProductByIdQuery query, CancellationToken cancellationToken)
     {
-        // Business logic to Get a product
-        logger.LogInformation("GetProductByIdHandler.Handle called with {@Query}", query);
-
         var product = await session.LoadAsync<Product>(query.Id, cancellationToken);
 
         if (product == null)
