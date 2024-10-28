@@ -8,7 +8,7 @@ namespace Catalog.Api.Products.CreateProduct;
 /// <summary>
 /// Validates the properties of a <see cref="CreateProductCommand"/> to ensure they meet the required conditions.
 /// </summary>
-internal class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CreateProductCommandValidator"/> class.
