@@ -4,11 +4,18 @@ services:
   catalog:
     image: eshop/catalog
     ports:
-      - "5001:80"
+      - "6000:8080"
+      - "6060:8081"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__Database=Server=localhost;Port=5432;Database=CatalogDb;User Id=appuser;Password=secret;Include Error Detail=true
     depends_on:
       - postgres
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
 
   postgres:
     image: postgres
@@ -18,3 +25,5 @@ services:
       POSTGRES_DB: CatalogDb
     ports:
       - "5432:5432"
+    volumes:
+      - postgress_catalog:/var/lib/postgresql/data
