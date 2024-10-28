@@ -30,7 +30,7 @@ internal class GetProductByIdHandler(
 
         if (product == null)
         {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(query.Id);
         }
 
         // return the product;
