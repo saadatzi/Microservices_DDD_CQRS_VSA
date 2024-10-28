@@ -4,8 +4,6 @@
 //     </copyright>
 // </fileheader>
 
-using FluentValidation;
-
 namespace Catalog.Api.Products.CreateProduct;
 
 /// <summary>
