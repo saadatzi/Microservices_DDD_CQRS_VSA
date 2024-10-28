@@ -58,3 +58,9 @@ Content-Type: application/json
 @delete_id = 0192cfa5-3e08-4035-bf32-d3e1fed46893
 DELETE {{Api_HostAddress}}/products/{{delete_id}}
 Content-Type: application/json
+
+###
+
+# Remove a product by ID
+Get {{Api_HostAddress}}/health
+Content-Type: application/json
