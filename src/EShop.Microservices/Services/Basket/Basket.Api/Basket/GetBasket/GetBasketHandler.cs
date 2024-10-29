@@ -10,7 +10,7 @@ namespace Basket.API.Basket.GetBasket;
 /// <summary>
 /// Handler for processing <see cref="GetBasketQuery"/> requests.
 /// </summary>
-public class GetBasketHandler(IBasketRepository basketRepository)
+public class GetBasketHandler(IBasketRepository repository)
     : IQueryHandler<GetBasketQuery, GetBasketResult>
 {
     /// <summary>
@@ -22,7 +22,7 @@ public class GetBasketHandler(IBasketRepository basketRepository)
     public async Task<GetBasketResult> Handle(GetBasketQuery query, CancellationToken cancellationToken)
     {
         // Retrieve the shopping basket from the repository
-        var basket = await basketRepository.GetBasket(query.UserName);
+        var basket = await repository.GetBasket(query.UserName);
         return new GetBasketResult(basket ?? new ShoppingCart(query.UserName)); // Return a new cart if none found
     }
 }

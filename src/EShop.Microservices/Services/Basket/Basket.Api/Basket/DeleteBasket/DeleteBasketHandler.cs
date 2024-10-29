@@ -9,7 +9,7 @@ namespace Basket.API.Basket.DeleteBasket;
 /// <summary>
 /// Command handler for processing delete basket commands.
 /// </summary>
-public class DeleteBasketHandler(IBasketRepository basketRepository)
+public class DeleteBasketHandler(IBasketRepository repository)
     : ICommandHandler<DeleteBasketCommand, DeleteBasketResult>
 {
     /// <summary>
@@ -21,7 +21,7 @@ public class DeleteBasketHandler(IBasketRepository basketRepository)
     public async Task<DeleteBasketResult> Handle(DeleteBasketCommand command, CancellationToken cancellationToken)
     {
         // TODO: delete basket from database and cache
-        await basketRepository.DeleteBasket(command.UserName, cancellationToken);
+        await repository.DeleteBasket(command.UserName, cancellationToken);
         return new DeleteBasketResult(true);
     }
 }
