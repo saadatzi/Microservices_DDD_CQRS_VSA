@@ -3,24 +3,16 @@
 //         Copyright (c) 2024 SSS. All rights reserved.
 //     </copyright>
 // </fileheader>
+using Basket.API.Data;
+
 namespace Basket.API.Basket.GetBasket;
 
 /// <summary>
 /// Handler for processing <see cref="GetBasketQuery"/> requests.
 /// </summary>
-public class GetBasketHandler : IQueryHandler<GetBasketQuery, GetBasketResult>
+public class GetBasketHandler(IBasketRepository basketRepository)
+    : IQueryHandler<GetBasketQuery, GetBasketResult>
 {
-    private readonly IBasketRepository _repository;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="GetBasketHandler"/> class.
-    /// </summary>
-    /// <param name="repository">The repository for accessing basket data.</param>
-    public GetBasketHandler(IBasketRepository repository)
-    {
-        _repository = repository;
-    }
-
     /// <summary>
     /// Handles the retrieval of a user's shopping basket.
     /// </summary>
@@ -30,7 +22,7 @@ public class GetBasketHandler : IQueryHandler<GetBasketQuery, GetBasketResult>
     public async Task<GetBasketResult> Handle(GetBasketQuery query, CancellationToken cancellationToken)
     {
         // Retrieve the shopping basket from the repository
-        var basket = await _repository.GetBasket(query.UserName);
+        var basket = await basketRepository.GetBasket(query.UserName);
         return new GetBasketResult(basket ?? new ShoppingCart(query.UserName)); // Return a new cart if none found
     }
 }

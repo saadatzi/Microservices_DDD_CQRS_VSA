@@ -6,6 +6,7 @@
 
 global using System.Collections.Generic;
 global using System.Reflection;
+global using Basket.API.Data;
 global using Basket.API.Exceptions;
 global using Basket.API.Models;
 global using BuildingBlocks.Behaviors;

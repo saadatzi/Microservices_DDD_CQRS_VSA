@@ -17,7 +17,7 @@ public interface IBasketRepository
     /// <param name="userName">The username associated with the shopping cart.</param>
     /// <param name="cancellationToken">A cancellation token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous operation, containing the user's shopping cart.</returns>
-    Task<ShoppingCart> GetBasket(string userName, CancellationToken cancellationToken);
+    Task<ShoppingCart> GetBasket(string userName, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Stores a shopping cart in the data store.
@@ -25,7 +25,7 @@ public interface IBasketRepository
     /// <param name="basket">The shopping cart to be stored.</param>
     /// <param name="cancellationToken">A cancellation token to monitor for cancellation requests.</param>
     /// <returns>A task that represents the asynchronous operation, containing the stored shopping cart.</returns>
-    Task<ShoppingCart> StoreBasket(ShoppingCart basket, CancellationToken cancellationToken);
+    Task<ShoppingCart> StoreBasket(ShoppingCart basket, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a shopping cart associated with the specified username.

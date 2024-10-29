@@ -3,13 +3,13 @@
 //         Copyright (c) 2024 SSS. All rights reserved.
 //     </copyright>
 // </fileheader>
-
 namespace Basket.API.Basket.StoreBasket;
 
 /// <summary>
 /// Handles the <see cref="StoreBasketCommand"/> command.
 /// </summary>
-public class StoreBasketHandler : ICommandHandler<StoreBasketCommand, StoreBasketResult>
+public class StoreBasketHandler(IBasketRepository basketRepository)
+    : ICommandHandler<StoreBasketCommand, StoreBasketResult>
 {
     /// <summary>
     /// Handles the command to store a shopping cart.
@@ -23,6 +23,7 @@ public class StoreBasketHandler : ICommandHandler<StoreBasketCommand, StoreBaske
 
         // TODO: Store basket in database (use Marten upsert - if exist, update; if not, create)
         // TODO: Update cache
+        await basketRepository.StoreBasket(cart, cancellationToken);
         return new StoreBasketResult(cart.UserName);
     }
 }
