@@ -2,21 +2,35 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (web)",
+            "name": ".NET Core Launch (web) - Catalog.Api",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/EShop.Microservices/Services/Catalog/Catalog.Api/bin/Debug/net8.0/Catalog.Api.dll", // Change to your project's output path
+            "preLaunchTask": "build Catalog.Api",
+            "program": "${workspaceFolder}/src/EShop.Microservices/Services/Catalog/Catalog.Api/bin/Debug/net8.0/Catalog.Api.dll",
             "args": [],
             "cwd": "${workspaceFolder}/src/EShop.Microservices/Services/Catalog/Catalog.Api",
             "stopAtEntry": false,
-            // "serverReadyAction": { // this interrupts opening the browser
-            //     "action": "openExternally",
-            //     "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
-            // },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
-                "ASPNETCORE_URLS": "http://localhost:5000;https://localhost:5005" // Set your desired URLs here
+                "ASPNETCORE_URLS": "http://localhost:5000;https://localhost:5050"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views",
+                "/wwwroot": "${workspaceFolder}/wwwroot"
+            }
+        },
+        {
+            "name": ".NET Core Launch (web) - Basket.Api",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build Basket.Api",
+            "program": "${workspaceFolder}/src/EShop.Microservices/Services/Basket/Basket.Api/bin/Debug/net8.0/Basket.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/EShop.Microservices/Services/Basket/Basket.Api",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:5001;https://localhost:5051"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views",
@@ -26,8 +40,7 @@
         {
             "name": ".NET Core Attach",
             "type": "coreclr",
-            "request": "attach",
-            // "processId": "${command:pickProcess}"
+            "request": "attach"
         }
     ]
 }

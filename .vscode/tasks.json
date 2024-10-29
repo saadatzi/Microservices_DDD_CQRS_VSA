@@ -2,18 +2,29 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build Catalog.Api",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/EShop.Microservices/Services/Catalog/Catalog.Api/Catalog.Api.csproj" // Change to your actual .csproj file
+                "${workspaceFolder}/src/EShop.Microservices/Services/Catalog/Catalog.Api/Catalog.Api.csproj"
             ],
             "problemMatcher": "$msCompile",
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "build Basket.Api",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/EShop.Microservices/Services/Basket/Basket.Api/Basket.Api.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
         }
     ]
 }
