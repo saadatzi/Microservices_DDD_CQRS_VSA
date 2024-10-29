@@ -30,6 +30,7 @@ namespace Basket.API.Models
         /// <summary>
         /// Gets or sets the username associated with the shopping cart.
         /// </summary>
+        [Identity]
         public string UserName { get; set; } = default!;
 
         /// <summary>
