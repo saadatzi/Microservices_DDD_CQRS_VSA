@@ -93,5 +93,3 @@ The use of backing services offers several key benefits in microservices archite
 Backing services are fundamental in cloud-native microservices, acting as essential external resources that handle critical aspects of functionality such as data storage, messaging, and security. By leveraging backing services, microservices gain flexibility, scalability, and maintainability, allowing for the creation of robust and resilient applications. The decoupled design of these services promotes scalability and independence, supporting the dynamic needs of modern applications.
 
 For further exploration, consult [Backing Services Documentation on GitHub](https://github.com/example) (replace with an actual link if available).
-
----

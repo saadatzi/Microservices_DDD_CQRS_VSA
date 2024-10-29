@@ -1,4 +1,4 @@
-![alt text](../Images/image-5.png)
+![alt text](image-5.png)
 # Middleware Pipeline and Pipeline Behavior in .NET
 
 ## Overview

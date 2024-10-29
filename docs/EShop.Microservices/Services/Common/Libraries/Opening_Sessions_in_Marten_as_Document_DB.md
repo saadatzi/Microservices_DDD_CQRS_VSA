@@ -1,4 +1,4 @@
-![alt text](../Images/image-2.png)
+![alt text](image-2.png)
 # Opening Sessions in Marten as Document DB
 ## Overview
 Marten, used as a Document Database with PostgreSQL, offers several session types through the `IDocumentStore` interface. These sessions allow different approaches to querying and managing data, depending on application needs for performance, consistency, and change tracking. This guide outlines the primary session types and the recommended best practices for session management in Marten.
