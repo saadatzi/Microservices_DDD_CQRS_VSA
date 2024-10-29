@@ -9,10 +9,25 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
-      - ConnectionStrings__Database=Server=localhost;Port=5432;Database=CatalogDb;User Id=appuser;Password=secret;Include Error Detail=true
+      # - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__Database=Server=catalogdb;Port=5432;Database=CatalogDb;User Id=appuser;Password=secret;Include Error Detail=true
     depends_on:
       - catalogdb
+
+  basket:
+    image: eshop/basket
+    ports:
+      - "6001:8080"
+      - "6061:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      # - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__Database=Server=basketdb;Port=5432;Database=BasketDb;User Id=appuser;Password=secret;Include Error Detail=true
+      - ConnectionStrings__Redis=distributedcache:6379
+    depends_on:
+      - basketdb
+      - distributedcache
 
   catalogdb:
     image: postgres
@@ -35,6 +50,12 @@ services:
       - "5433:5432"
     volumes:
       - postgres_basket:/var/lib/postgresql/data
+  
+  distributedcache:
+    image: redis
+    container_name: distributedcache
+    ports:
+      - "6379:6379"
 
 volumes:
   postgres_catalog:
