@@ -5,7 +5,7 @@ The following table outlines the available REST API endpoints for the Basket Mic
 | Method | Request URI           | Use Cases                          |
 |--------|-----------------------|------------------------------------|
 | GET    | `/basket/{userName}`  | Get basket with username           |
-| POST   | `/basket/{userName}`  | Store basket (insert-update)      |
+| POST   | `/basket/{userName}`  | Store basket (insert-update)       |
 | DELETE | `/basket/{userName}`  | Delete basket with username        |
 | POST   | `/basket/checkout`    | Checkout basket                    |
 
