@@ -4,9 +4,6 @@
 //     </copyright>
 // </fileheader>
 
-using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
