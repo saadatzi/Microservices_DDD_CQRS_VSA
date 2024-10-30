@@ -38,6 +38,24 @@
             }
         },
         {
+            "name": ".NET Core Launch (web) - Discount.Grpc",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build Discount.Grpc",
+            "program": "${workspaceFolder}/src/EShop.Microservices/Services/Discount/Discount.Grpc/bin/Debug/net8.0/Discount.Grpc.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/EShop.Microservices/Services/Discount/Discount.Grpc",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:5002;https://localhost:5052"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views",
+                "/wwwroot": "${workspaceFolder}/wwwroot"
+            }
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"

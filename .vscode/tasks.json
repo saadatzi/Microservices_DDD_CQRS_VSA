@@ -25,6 +25,17 @@
             ],
             "problemMatcher": "$msCompile",
             "group": "build"
+        },
+        {
+            "label": "build Discount.Grpc",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/EShop.Microservices/Services/Discount/Discount.Grpc/Discount.Grpc.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build"
         }
     ]
 }
