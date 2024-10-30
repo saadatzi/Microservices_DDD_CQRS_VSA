@@ -42,10 +42,21 @@ public class DiscountService
     /// <param name="request">The request containing new discount details.</param>
     /// <param name="context">The server call context.</param>
     /// <returns>A <see cref="CouponModel"/> representing the created discount.</returns>
-    public override Task<CouponModel> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
+    public override async Task<CouponModel> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
     {
-        // Placeholder for actual logic to create a discount
-        return base.CreateDiscount(request, context);
+        var coupon = request.Coupon.Adapt<Coupon>();
+
+        if (coupon == null)
+        {
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid request object."));
+        }
+
+        dbContext.Coupons.Add(coupon);
+        await dbContext.SaveChangesAsync();
+
+        logger.LogInformation($"Discount is successfully created. productName : {coupon.ProductName}, amount: {coupon.Amount}");
+        var couponModel = coupon.Adapt<CouponModel>();
+        return couponModel!;
     }
 
     /// <summary>
@@ -54,10 +65,21 @@ public class DiscountService
     /// <param name="request">The request containing updated discount details.</param>
     /// <param name="context">The server call context.</param>
     /// <returns>A <see cref="CouponModel"/> representing the updated discount.</returns>
-    public override Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request, ServerCallContext context)
+    public override async Task<CouponModel> UpdateDiscount(UpdateDiscountRequest request, ServerCallContext context)
     {
-        // Placeholder for actual logic to update a discount
-        return base.UpdateDiscount(request, context);
+        var coupon = request.Coupon.Adapt<Coupon>();
+
+        if (coupon == null)
+        {
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid request object."));
+        }
+
+        dbContext.Coupons.Update(coupon);
+        await dbContext.SaveChangesAsync();
+
+        logger.LogInformation($"Discount is updated successfully. productName: {coupon.ProductName}, amount: {coupon.Amount}");
+        var couponModel = coupon.Adapt<CouponModel>();
+        return couponModel;
     }
 
     /// <summary>
@@ -66,9 +88,22 @@ public class DiscountService
     /// <param name="request">The request containing the discount identifier to delete.</param>
     /// <param name="context">The server call context.</param>
     /// <returns>A <see cref="DeleteDiscountResponse"/> indicating success or failure.</returns>
-    public override Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
+    public override async Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request, ServerCallContext context)
     {
-        // Placeholder for actual logic to delete a discount
-        return base.DeleteDiscount(request, context);
+        var coupon = await dbContext
+            .Coupons
+            .FirstOrDefaultAsync(x => x.ProductName == request.ProductName);
+
+        if (coupon == null)
+        {
+            throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid request object"));
+        }
+
+        dbContext.Coupons.Remove(coupon);
+        await dbContext.SaveChangesAsync();
+
+        logger.LogInformation($"Discount is removed successfully. productName: {coupon.ProductName}, amount: {coupon.Amount}");
+
+        return new DeleteDiscountResponse { Success = true };
     }
 }
