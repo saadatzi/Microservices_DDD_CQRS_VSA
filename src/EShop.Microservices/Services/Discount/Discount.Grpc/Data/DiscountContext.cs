@@ -29,4 +29,28 @@ public class DiscountContext : DbContext
     /// This property provides access to the Coupons table in the database.
     /// </summary>
     public DbSet<Coupon> Coupons { get; set; } = default!;
+
+    /// <summary>
+    /// Configures the model creation, including seeding initial data for the Coupons table.
+    /// </summary>
+    /// <param name="modelBuilder">The model builder used to configure entities.</param>
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Seed initial data for the Coupons table.
+        modelBuilder.Entity<Coupon>().HasData(
+            new Coupon
+            {
+                Id = 1,
+                ProductName = "iPhone X",
+                Description = "iPhone Discount",
+                Amount = 150,
+            },
+            new Coupon
+            {
+                Id = 2,
+                ProductName = "Samsung 10",
+                Description = "Samsung Discount",
+                Amount = 100,
+            });
+    }
 }
