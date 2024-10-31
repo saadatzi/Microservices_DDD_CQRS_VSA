@@ -15,18 +15,25 @@ Content-Type: application/json
       "userName": "{{userName}}",
       "items": [
         {
-        "productId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
-        "productName": "iPhone 13",
-        "quantity": 1,
-        "color": "Red",
-        "price": 999.99
+          "productId": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+          "productName": "iPhone 13",
+          "quantity": 1,
+          "color": "Red",
+          "price": 999.99
         },
         {
-        "productId": "c9bf9e57-1685-4c89-bafb-ff5af830be8a",
-        "productName": "Samsung Galaxy S21",
-        "quantity": 2,
-        "color": "Blue",
-        "price": 799.99
+          "productId": "c9bf9e57-1685-4c89-bafb-ff5af830be8a",
+          "productName": "Samsung Galaxy S21",
+          "quantity": 2,
+          "color": "Blue",
+          "price": 799.99
+        },
+        {
+          "productId": "b9bf9e58-1685-4c80-bafb-ff5af830be7a",
+          "productName": "iPhone X",
+          "quantity": 1,
+          "color": "Red",
+          "price": 899.99
         }
       ]
     }
