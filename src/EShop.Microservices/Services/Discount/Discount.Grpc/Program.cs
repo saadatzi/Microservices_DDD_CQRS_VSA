@@ -8,12 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+builder.Services.AddGrpcReflection();
+
 builder.Services.AddDbContext<DiscountContext>(opts =>
 {
     opts.UseSqlite(builder.Configuration.GetConnectionString("Database"));
 });
 
 var app = builder.Build();
+
+// Enable gRPC Reflection in development only
+if (app.Environment.IsDevelopment())
+{
+    app.MapGrpcReflectionService();
+}
 
 // Configure the HTTP request pipeline.
 app.UseMigration();
