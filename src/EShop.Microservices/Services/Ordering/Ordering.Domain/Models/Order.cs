@@ -66,4 +66,95 @@ public class Order : Aggregate<OrderId>
         get => OrderItems.Sum(x => x.Price * x.Quantity);
         private set { }
     }
+
+    /// <summary>
+    /// Creates a new <see cref="Order"/> instance with the specified details.
+    /// </summary>
+    /// <param name="id">The unique identifier for the order.</param>
+    /// <param name="customerId">The customer ID associated with the order.</param>
+    /// <param name="orderName">The name of the order.</param>
+    /// <param name="shippingAddress">The shipping address for the order.</param>
+    /// <param name="billingAddress">The billing address for the order.</param>
+    /// <param name="payment">The payment information for the order.</param>
+    /// <returns>A new <see cref="Order"/> instance with an associated domain event for order creation.</returns>
+    public static Order Create(
+        OrderId id,
+        CustomerId customerId,
+        OrderName orderName,
+        Address shippingAddress,
+        Address billingAddress,
+        Payment payment)
+    {
+        var order = new Order
+        {
+            Id = id,
+            CustomerId = customerId,
+            OrderName = orderName,
+            ShippingAddress = shippingAddress,
+            BillingAddress = billingAddress,
+            Payment = payment,
+            Status = OrderStatus.Pending,
+        };
+
+        // Add a domain event indicating that the order has been created.
+        order.AddDomainEvent(new OrderCreatedEvent(order));
+
+        return order;
+    }
+
+    /// <summary>
+    /// Updates the order details and raises an <see cref="OrderUpdatedEvent"/>.
+    /// </summary>
+    /// <param name="orderName">The new name of the order.</param>
+    /// <param name="shippingAddress">The new shipping address for the order.</param>
+    /// <param name="billingAddress">The new billing address for the order.</param>
+    /// <param name="payment">The new payment details for the order.</param>
+    /// <param name="status">The new status of the order.</param>
+    public void Update(
+        OrderName orderName,
+        Address shippingAddress,
+        Address billingAddress,
+        Payment payment,
+        OrderStatus status)
+    {
+        OrderName = orderName;
+        ShippingAddress = shippingAddress;
+        BillingAddress = billingAddress;
+        Payment = payment;
+        Status = status;
+
+        // Add a domain event indicating that the order has been updated.
+        AddDomainEvent(new OrderUpdatedEvent(this));
+    }
+
+    /// <summary>
+    /// Adds an item to the order.
+    /// </summary>
+    /// <param name="productId">The ID of the product to add.</param>
+    /// <param name="quantity">The quantity of the product to add.</param>
+    /// <param name="price">The price of the product.</param>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// Thrown when <paramref name="quantity"/> or <paramref name="price"/> is less than or equal to zero.
+    /// </exception>
+    public void Add(ProductId productId, int quantity, decimal price)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(quantity);
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(price);
+
+        var orderItem = new OrderItem(Id!, productId, quantity, price);
+        _orderItems.Add(orderItem);
+    }
+
+    /// <summary>
+    /// Removes an item from the order based on the product ID.
+    /// </summary>
+    /// <param name="productId">The ID of the product to remove.</param>
+    public void Remove(ProductId productId)
+    {
+        var orderItem = _orderItems.FirstOrDefault(x => x.ProductId == productId);
+        if (orderItem is not null)
+        {
+            _orderItems.Remove(orderItem);
+        }
+    }
 }
