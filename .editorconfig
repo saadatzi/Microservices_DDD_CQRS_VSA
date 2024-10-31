@@ -9,3 +9,9 @@ dotnet_diagnostic.SA1101.severity = silent
 
 # SA1200: Using directives should be placed correctly
 dotnet_diagnostic.SA1200.severity = silent
+
+# SA1309: Field names should not begin with underscore
+dotnet_diagnostic.SA1309.severity = silent
+
+# CS9113: Parameter is unread.
+dotnet_diagnostic.CS9113.severity = silent
