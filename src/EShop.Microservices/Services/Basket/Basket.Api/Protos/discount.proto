@@ -1,0 +1,65 @@
+// <fileheader>
+//     <copyright file="discount.proto" company="SSS">
+//         Copyright (c) 2024 SSS. All rights reserved.
+//     </copyright>
+//     <summary>
+//         This file defines the gRPC service for Discount operations in the Discount microservice.
+//         It includes CRUD operations to manage discount coupons.
+//     </summary>
+// </fileheader>
+
+syntax = "proto3";
+
+option csharp_namespace = "Discount.Grpc";
+
+package discount;
+
+// The discount service definition.
+service DiscountProtoService {
+    // Discount CRUD Operations
+
+    // Retrieves a discount based on the product name.
+    rpc GetDiscount (GetDiscountRequest) returns (CouponModel);
+
+    // Creates a new discount.
+    rpc CreateDiscount (CreateDiscountRequest) returns (CouponModel);
+
+    // Updates an existing discount.
+    rpc UpdateDiscount (UpdateDiscountRequest) returns (CouponModel);
+
+    // Deletes a discount.
+    rpc DeleteDiscount (DeleteDiscountRequest) returns (DeleteDiscountResponse);
+}
+
+// Message structure for GetDiscount request, containing the product name.
+message GetDiscountRequest {
+    string productName = 1; // The name of the product for which the discount is retrieved.
+}
+
+// Message structure representing a discount coupon.
+message CouponModel {
+    int32 id = 1;             // Unique identifier of the coupon.
+    string productName = 2;   // Name of the product to which the coupon applies.
+    string description = 3;   // Description of the discount.
+    int32 amount = 4;         // Discount amount.
+}
+
+// Message structure for CreateDiscount request, containing a CouponModel.
+message CreateDiscountRequest {
+    CouponModel coupon = 1; // Coupon details for creating a new discount.
+}
+
+// Message structure for UpdateDiscount request, containing a CouponModel.
+message UpdateDiscountRequest {
+    CouponModel coupon = 1; // Coupon details for updating an existing discount.
+}
+
+// Message structure for DeleteDiscount request, containing the product name.
+message DeleteDiscountRequest {
+    string productName = 1; // The name of the product for which the discount is deleted.
+}
+
+// Message structure for DeleteDiscount response, containing success status.
+message DeleteDiscountResponse {
+    bool success = 1; // Indicates whether the delete operation was successful.
+}

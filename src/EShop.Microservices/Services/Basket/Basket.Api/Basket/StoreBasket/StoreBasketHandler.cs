@@ -8,7 +8,9 @@ namespace Basket.API.Basket.StoreBasket;
 /// <summary>
 /// Handles the <see cref="StoreBasketCommand"/> command.
 /// </summary>
-public class StoreBasketHandler(IBasketRepository repository)
+public class StoreBasketHandler(
+    IBasketRepository repository,
+    DiscountProtoService.DiscountProtoServiceClient discountProto)
     : ICommandHandler<StoreBasketCommand, StoreBasketResult>
 {
     /// <summary>
@@ -19,12 +21,28 @@ public class StoreBasketHandler(IBasketRepository repository)
     /// <returns>A task representing the asynchronous operation, with the result of storing the shopping cart.</returns>
     public async Task<StoreBasketResult> Handle(StoreBasketCommand command, CancellationToken cancellationToken)
     {
-        ShoppingCart cart = command.Cart;
+        // TODO : communicate with Discount.Grpc and calculate latest price of product
+        await DeductDiscount(command.Cart, cancellationToken);
+        await repository.StoreBasket(command.Cart, cancellationToken);
+        return new StoreBasketResult(command.Cart.UserName);
+    }
 
-        // TODO: Store basket in database (use Marten upsert - if exist, update; if not, create)
-        // TODO: Update cache
-        await repository.StoreBasket(cart, cancellationToken);
-        return new StoreBasketResult(cart.UserName);
+    /// <summary>
+    /// Deducts discounts for each item in the shopping cart by communicating with the Discount.Grpc service.
+    /// </summary>
+    /// <param name="cart">The shopping cart containing items to which discounts should be applied.</param>
+    /// <param name="cancellationToken">Token to observe while waiting for the task to complete.</param>
+    private async Task DeductDiscount(ShoppingCart cart, CancellationToken cancellationToken)
+    {
+        // Communicate with Discount.Grpc and calculate latest prices of products in the cart
+        foreach (var item in cart.Items)
+        {
+            // Sending a GetDiscountRequest to the Discount.Grpc service to fetch the discount for each item
+            var coupon = await discountProto.GetDiscountAsync(new GetDiscountRequest { ProductName = item.ProductName }, cancellationToken: cancellationToken);
+
+            // Apply the discount amount retrieved to the item price
+            item.Price -= coupon.Amount;
+        }
     }
 }
 
