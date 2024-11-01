@@ -10,12 +10,6 @@ using Ordering.Infrastructure;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
-
-//-----------------
-// Infrastructure Layer - EF Core
-// Application Layer - MediatR
-// API Layer - Carter, HealthChecks, etc.
-//-----------------
 builder.Services
     .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration)

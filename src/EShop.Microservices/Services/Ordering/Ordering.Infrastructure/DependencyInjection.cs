@@ -3,10 +3,6 @@
 //         Copyright (c) 2024 SSS. All rights reserved.
 //     </copyright>
 // </fileheader>
-
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Ordering.Infrastructure;
 
 /// <summary>
@@ -29,8 +25,8 @@ public static class DependencyInjection
         //// Add services to the container, like DbContext for EF Core.
         //// Uncomment the following lines when setting up Entity Framework Core:
 
-        // services.AddDbContext<ApplicationDbContext>(options =>
-        //     options.UseSqlServer(connectionString));
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(connectionString));
 
         //// Register the ApplicationDbContext with a scoped lifetime for DI.
         //// services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
