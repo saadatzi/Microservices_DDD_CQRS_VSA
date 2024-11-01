@@ -56,6 +56,24 @@
             }
         },
         {
+            "name": ".NET Core Launch (web) - Ordering.Api",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build Ordering.Api",
+            "program": "${workspaceFolder}/src/EShop.Microservices/Services/Ordering/Ordering.Api/bin/Debug/net8.0/Ordering.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/EShop.Microservices/Services/Ordering/Ordering.Api",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:5003;https://localhost:5053"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views",
+                "/wwwroot": "${workspaceFolder}/wwwroot"
+            }
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"

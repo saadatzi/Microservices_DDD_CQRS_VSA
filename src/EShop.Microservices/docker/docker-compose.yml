@@ -42,6 +42,19 @@ services:
       # - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__Database=Data Source=discountdb
 
+  ordering.api:
+    image: eshop/ordering
+    ports:
+      - "6003:8080"
+      - "6063:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      # - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__Database=Server=localhost;Database=OrderDb;User Id=sa;Password=SsS12345678;Encrypt=False;TrustServerCertificate=True
+    depends_on:
+      - orderdb
+
   orderdb:
     container_name: orderdb
     image: mcr.microsoft.com/mssql/server:2022-latest
