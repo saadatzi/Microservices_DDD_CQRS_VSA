@@ -22,11 +22,15 @@ public static class DependencyInjection
         // Retrieve the connection string from the configuration settings
         var connectionString = configuration.GetConnectionString("Database");
 
-        //// Add services to the container, like DbContext for EF Core.
-        //// Uncomment the following lines when setting up Entity Framework Core:
+        // Add services to the container
+        services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+        services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(connectionString));
+        services.AddDbContext<ApplicationDbContext>((sp, options) =>
+        {
+            options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+            options.UseSqlServer(connectionString);
+        });
 
         //// Register the ApplicationDbContext with a scoped lifetime for DI.
         //// services.AddScoped<IApplicationDbContext, ApplicationDbContext>();

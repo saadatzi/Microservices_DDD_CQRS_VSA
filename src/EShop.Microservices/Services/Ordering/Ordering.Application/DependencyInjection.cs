@@ -4,6 +4,7 @@
 //     </copyright>
 // </fileheader>
 
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Ordering.Application;
@@ -21,13 +22,10 @@ public static class DependencyInjection
     /// <returns>The updated IServiceCollection with registered application services.</returns>
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        // Uncomment the following lines to add MediatR and automatically register handlers
-        // from the current assembly, typically used in CQRS implementations.
-
-        // services.AddMediatR(cfg =>
-        // {
-        //     cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
-        // });
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+        });
         return services;
     }
 }
