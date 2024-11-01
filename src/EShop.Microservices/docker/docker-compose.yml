@@ -42,6 +42,15 @@ services:
       # - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__Database=Data Source=discountdb
 
+  orderdb:
+    container_name: orderdb
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=SsS12345678
+    ports:
+      - "1433:1433"
+
   catalogdb:
     image: postgres
     environment:
