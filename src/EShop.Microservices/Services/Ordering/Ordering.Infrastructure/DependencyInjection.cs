@@ -3,6 +3,8 @@
 //         Copyright (c) 2024 SSS. All rights reserved.
 //     </copyright>
 // </fileheader>
+using Ordering.Application.Data;
+
 namespace Ordering.Infrastructure;
 
 /// <summary>
@@ -33,7 +35,7 @@ public static class DependencyInjection
         });
 
         //// Register the ApplicationDbContext with a scoped lifetime for DI.
-        //// services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
         return services;
     }

@@ -3,13 +3,15 @@
 //         Copyright (c) 2024 SSS. All rights reserved.
 //     </copyright>
 // </fileheader>
+using Ordering.Application.Data;
+
 namespace Ordering.Infrastructure.Data;
 
 /// <summary>
 /// Represents the database context for the Ordering service, derived from DbContext.
 /// This context is used to configure the EF Core settings and provide DbSets for the domain models.
 /// </summary>
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ApplicationDbContext"/> class with the specified options.
