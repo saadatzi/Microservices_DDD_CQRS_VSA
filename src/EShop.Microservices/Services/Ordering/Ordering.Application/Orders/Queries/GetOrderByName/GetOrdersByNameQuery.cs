@@ -3,7 +3,6 @@
 //         Copyright (c) 2024 SSS. All rights reserved.
 //     </copyright>
 // </fileheader>
-
 namespace Ordering.Application.Orders.Queries.GetOrderByName;
 
 /// <summary>
