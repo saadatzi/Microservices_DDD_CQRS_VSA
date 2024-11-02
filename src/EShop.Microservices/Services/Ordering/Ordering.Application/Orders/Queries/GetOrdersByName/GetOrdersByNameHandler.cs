@@ -3,7 +3,7 @@
 //         Copyright (c) 2024 SSS. All rights reserved.
 //     </copyright>
 // </fileheader>
-namespace Ordering.Application.Orders.Queries.GetOrderByName;
+namespace Ordering.Application.Orders.Queries.GetOrdersByName;
 
 /// <summary>
 /// Handler for processing the <see cref="GetOrdersByNameQuery"/> to retrieve orders by name.
