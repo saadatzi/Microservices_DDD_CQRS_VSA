@@ -1,0 +1,127 @@
+@order_id = 9b171324-3e48-42da-8640-7dbc4463c3fc
+@userName = SSS
+@Api_HostAddress = http://localhost:5003
+
+### Get Orders with Pagination
+GET {{Api_HostAddress}}/orders?pageIndex=0&pageSize=10
+Content-Type: application/json
+
+### Get Orders by Order Name
+GET {{Api_HostAddress}}/orders/ORD_3
+Content-Type: application/json
+
+### Get Orders by Customer ID
+GET {{Api_HostAddress}}/orders/customer/c2b6a812-5c4d-4e8d-88f5-dfb769b0a1f3
+Content-Type: application/json
+
+### Create a new Order
+POST {{Api_HostAddress}}/orders
+Content-Type: application/json
+
+{
+  "Order": {
+    "CustomerId": "aad5f9d2-bb2e-4f67-9b1a-7b7aef4c3e7f",
+    "OrderName": "Ord_1",
+    "ShippingAddress": {
+      "FirstName": "John",
+      "LastName": "Doe",
+      "EmailAddress": "john@example.com",
+      "AddressLine": "123 Main St",
+      "Country": "USB",
+      "State": "NY",
+      "ZipCode": "10001"
+    },
+    "BillingAddress": {
+      "FirstName": "John",
+      "LastName": "Doe",
+      "EmailAddress": "john@example.com",
+      "AddressLine": "123 Main St",
+      "Country": "USA",
+      "State": "NY",
+      "ZipCode": "10001"
+    },
+    "Payment": {
+      "CardName": "John Doe",
+      "CardNumber": "4111111111111111",
+      "Expiration": "12/25",
+      "Cvv": "123",
+      "PaymentMethod": 1
+    },
+    "Status": 2,
+    "OrderItems": [
+      {
+        "ProductId": "d5a6f9d3-7a8e-41d3-8c95-3e4f5d6e7892",
+        "Quantity": 4,
+        "Price": 600.00
+      },
+      {
+        "ProductId": "ec5d6b2a-b0a2-4e1d-a786-4f2a3b5d9e72",
+        "Quantity": 1,
+        "Price": 550.00
+      }
+    ]
+  }
+}
+
+### Update an Existing Order
+PUT {{Api_HostAddress}}/orders
+Content-Type: application/json
+
+{
+  "Order": {
+    "Id": "{{order_id}}",
+    "CustomerId": "aad5f9d2-bb2e-4f67-9b1a-7b7aef4c3e7f",
+    "OrderName": "ORD_3",
+    "ShippingAddress": {
+      "FirstName": "Jane",
+      "LastName": "Doe",
+      "EmailAddress": "jane.doe@example.com",
+      "AddressLine": "456 New St",
+      "Country": "USA",
+      "State": "CA",
+      "ZipCode": "90001"
+    },
+    "BillingAddress": {
+      "FirstName": "Jane",
+      "LastName": "Doe",
+      "EmailAddress": "jane.doe@example.com",
+      "AddressLine": "456 New St",
+      "Country": "USA",
+      "State": "CA",
+      "ZipCode": "90001"
+    },
+    "Payment": {
+      "CardName": "Jane Doe",
+      "CardNumber": "4111111111111112",
+      "Expiration": "11/26",
+      "Cvv": "321",
+      "PaymentMethod": 2
+    },
+    "Status": 2,
+    "OrderItems": [
+      {
+        "ProductId": "b7c8d3a2-f7e5-49d4-9c5e-5d6a4e7c8d7f",
+        "Quantity": 3,
+        "Price": 950.00
+      },
+      {
+        "ProductId": "f6b7d2a1-c8e4-49c5-b9a1-6b7d4a2e7b8f",
+        "Quantity": 2,
+        "Price": 1000.00
+      },
+      {
+        "ProductId": "d5a6f9d3-7a8e-41d3-8c95-3e4f5d6e7892",
+        "Quantity": 1,
+        "Price": 600.00
+      }
+    ]
+  }
+}
+
+### Delete an Order by ID
+DELETE {{Api_HostAddress}}/orders/{{order_id}}
+Content-Type: application/json
+
+### Health Check
+GET {{Api_HostAddress}}/health
+Content-Type: application/json
