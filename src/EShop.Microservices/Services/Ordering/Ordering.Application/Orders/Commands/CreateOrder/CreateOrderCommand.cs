@@ -3,7 +3,6 @@
 //         Copyright (c) 2024 SSS. All rights reserved.
 //     </copyright>
 // </fileheader>
-// File: CreateOrderCommand.cs
 namespace Ordering.Application.Orders.Commands.CreateOrder;
 
 /// <summary>

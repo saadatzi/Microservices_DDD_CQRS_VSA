@@ -22,7 +22,7 @@ public class UpdateOrderHandler(IApplicationDbContext dbContext)
         // Update Order entity from command object
         var orderId = OrderId.Of(command.Order.Id);
         var order = await dbContext.Orders
-            .FindAsync(new object[] { orderId }, cancellationToken: cancellationToken);
+            .FindAsync([orderId], cancellationToken: cancellationToken);
 
         if (order is null)
         {
@@ -78,5 +78,10 @@ public class UpdateOrderHandler(IApplicationDbContext dbContext)
             billingAddress: updatedBillingAddress,
             payment: updatedPayment,
             status: orderDto.Status);
+
+        foreach (var orderItemDto in orderDto.OrderItems)
+        {
+            order.Add(ProductId.Of(orderItemDto.ProductId), orderItemDto.Quantity, orderItemDto.Price);
+        }
     }
 }
