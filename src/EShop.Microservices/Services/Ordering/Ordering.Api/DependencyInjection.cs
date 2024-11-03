@@ -3,6 +3,9 @@
 //         Copyright (c) 2024 SSS. All rights reserved.
 //     </copyright>
 // </fileheader>
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Configuration;
 
 namespace Ordering.Api;
 
@@ -15,11 +18,14 @@ public static class DependencyInjection
     /// Registers services needed for the API layer.
     /// </summary>
     /// <param name="services">The IServiceCollection to which services are added.</param>
+    /// <param name="configuration">The IConfiguration to get appsettings.</param>
     /// <returns>The updated IServiceCollection with API services registered.</returns>
-    public static IServiceCollection AddApiServices(this IServiceCollection services)
+    public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
     {
-        // Uncomment the following line to add Carter services, which allows defining minimal API endpoints.
-        // services.AddCarter();
+        services.AddCarter();
+        services.AddExceptionHandler<CustomExceptionHandler>();
+        services.AddHealthChecks()
+            .AddSqlServer(configuration.GetConnectionString("Database")!);
         return services;
     }
 
@@ -30,8 +36,14 @@ public static class DependencyInjection
     /// <returns>The updated WebApplication with API configurations applied.</returns>
     public static WebApplication UseApiServices(this WebApplication app)
     {
-        // Uncomment the following line to map Carter endpoints to the application.
-        // app.MapCarter();
+        app.MapCarter();
+        app.UseExceptionHandler(options => { });
+        app.UseHealthChecks(
+            "/health",
+            new HealthCheckOptions
+            {
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
+            });
         return app;
     }
 }
