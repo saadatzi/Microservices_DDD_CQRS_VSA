@@ -26,10 +26,14 @@ services:
       - ConnectionStrings__Database=Server=basketdb;Port=5432;Database=BasketDb;User Id=appuser;Password=secret;Include Error Detail=true
       - ConnectionStrings__Redis=distributedcache:6379
       - GrpcSettings__DiscountUrl=http://discount.grpc:8080
+      - MessageBroker__Host=amqp://ecommerce-mq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
     depends_on:
       - basketdb
       - distributedcache
       - discount.grpc
+      - messagebroker
 
   discount.grpc:
     image: eshop/discount
@@ -52,8 +56,13 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
       # - ASPNETCORE_HTTPS_PORTS=8081
       - ConnectionStrings__Database=Server=localhost;Database=OrderDb;User Id=sa;Password=SsS12345678;Encrypt=False;TrustServerCertificate=True
+      - MessageBroker__Host=amqp://ecommerce-mq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
+      - FeatureManagement__OrderFulfillment=false
     depends_on:
       - orderdb
+      - messagebroker
 
   orderdb:
     container_name: orderdb
@@ -91,7 +100,18 @@ services:
     container_name: distributedcache
     ports:
       - "6379:6379"
-
+  
+  messagebroker:
+    container_name: messagebroker
+    image: rabbitmq:4.0.3-management
+    hostname: ecommerce-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"    # RabbitMQ default port for AMQP protocol
+      - "15672:15672"  # RabbitMQ management console
+    
 volumes:
   postgres_catalog:
   postgres_basket:
