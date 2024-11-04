@@ -28,7 +28,6 @@ builder.Services.AddStackExchangeRedisCache(options =>
 });
 
 // Grpc Services
-//  TODO: Add Grpc Services
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options =>
 {
     options.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]!);
@@ -42,6 +41,9 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
     };
     return handler;
 });
+
+// Async Communication Services
+builder.Services.AddMessageBroker(builder.Configuration);
 
 // Cross-cutting Services
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
