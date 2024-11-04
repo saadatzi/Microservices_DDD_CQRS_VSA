@@ -6,6 +6,7 @@
 
 using System.Reflection;
 using BuildingBlocks.Behaviors;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Ordering.Application;
@@ -20,8 +21,11 @@ public static class DependencyInjection
     /// This includes services like MediatR or other CQRS-related configurations.
     /// </summary>
     /// <param name="services">The IServiceCollection to which services are added.</param>
+    /// <param name="configuration">The IConfiguration to fetch appsettings.json values.</param>
     /// <returns>The updated IServiceCollection with registered application services.</returns>
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static IServiceCollection AddApplicationServices(
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
         services.AddMediatR(config =>
         {
@@ -29,6 +33,7 @@ public static class DependencyInjection
             config.AddOpenBehavior(typeof(ValidationBehavior<,>));
             config.AddOpenBehavior(typeof(LoggingBehavior<,>));
         });
+        services.AddMessageBroker(configuration, Assembly.GetExecutingAssembly());
         return services;
     }
 }
